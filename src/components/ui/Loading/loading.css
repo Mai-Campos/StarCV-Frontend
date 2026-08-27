@@ -1,0 +1,248 @@
+/*
+ * ================================================================
+ * ESTRELLA CENTRAL
+ * ================================================================
+ *
+ * La estrella tiene 16×16px.
+ *
+ * clip-path:
+ *     recorta el cuadrado original y conserva únicamente
+ *     los puntos que nosotros definimos.
+ *
+ * Los porcentajes representan posiciones dentro del cuadrado.
+ *
+ * Por ejemplo:
+ *
+ *     50% 0%
+ *
+ * representa:
+ *
+ *             ▲
+ *             │
+ *          centro X
+ *          parte superior
+ *
+ * Y:
+ *
+ *     100% 50%
+ *
+ * representa:
+ *
+ *     ───────────▶
+ *                mitad derecha
+ *
+ * Al conectar todos los puntos conseguimos una estrella.
+ */
+
+.star-cv-core {
+  width: 16px;
+  height: 16px;
+
+  background: var(--color-primary);
+
+  clip-path: polygon(
+    50% 0%,
+    62% 38%,
+    100% 50%,
+    62% 62%,
+    50% 100%,
+    38% 62%,
+    0% 50%,
+    38% 38%
+  );
+
+  /*
+   * La estrella cambia ligeramente de tamaño y opacidad
+   * continuamente.
+   */
+  animation: star-cv-core-pulse 1.8s ease-in-out infinite;
+}
+
+
+/*
+ * ================================================================
+ * ANIMACIÓN DE LA ESTRELLA
+ * ================================================================
+ *
+ * 0% y 100%:
+ *     tamaño y opacidad normales.
+ *
+ * 50%:
+ *     aumenta ligeramente y pierde algo de opacidad.
+ *
+ * Esto produce el efecto de "respiración".
+ */
+
+@keyframes star-cv-core-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.25);
+    opacity: 0.7;
+  }
+}
+
+
+/*
+ * ================================================================
+ * NODOS
+ * ================================================================
+ *
+ * Los nodos comienzan:
+ *
+ *     opacity: 0
+ *     scale: 0.5
+ *     translateY: 4px
+ *
+ * y terminan:
+ *
+ *     opacity: 1
+ *     scale: 1
+ *     translateY: 0
+ *
+ * Esto produce una aparición suave.
+ */
+
+@keyframes star-cv-node-appear {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(4px)
+      scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/*
+ * Animación base para todos los nodos.
+ */
+
+.star-cv-node {
+  /*
+   * Comenzamos transparentes.
+   *
+   * Esto es necesario porque la animación comienza
+   * después de cargar el componente.
+   */
+  opacity: 0;
+
+  animation:
+    star-cv-node-appear
+    500ms
+    ease-out
+    forwards;
+}
+
+
+/*
+ * ================================================================
+ * DELAYS DE LOS NODOS
+ * ================================================================
+ *
+ * No queremos que todos aparezcan al mismo tiempo.
+ *
+ * Nodo superior:
+ *     aparece inmediatamente.
+ *
+ * Nodo derecho:
+ *     espera 300ms.
+ *
+ * Nodo inferior:
+ *     espera 600ms.
+ */
+
+.star-cv-node-delay-1 {
+  animation-delay: 300ms;
+}
+
+.star-cv-node-delay-2 {
+  animation-delay: 600ms;
+}
+
+
+/*
+ * ================================================================
+ * CONEXIONES SVG
+ * ================================================================
+ *
+ * stroke-dasharray:
+ *     define un patrón de trazos.
+ *
+ * stroke-dashoffset:
+ *     desplaza ese patrón.
+ *
+ * Al animar el offset conseguimos que parezca que
+ * la línea se está dibujando.
+ */
+
+.star-cv-connection {
+  stroke-dasharray: 100;
+
+  stroke-dashoffset: 100;
+
+  /*
+   * La línea comienza invisible.
+   */
+  opacity: 0;
+
+  animation:
+    star-cv-draw-line
+    600ms
+    ease-out
+    forwards;
+}
+
+
+/*
+ * Animación que dibuja la línea.
+ */
+
+@keyframes star-cv-draw-line {
+  from {
+    stroke-dashoffset: 100;
+    opacity: 0;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+
+/*
+ * ================================================================
+ * DELAYS DE LAS CONEXIONES
+ * ================================================================
+ *
+ * Primero aparece la conexión superior.
+ *
+ * Después la conexión derecha.
+ *
+ * Finalmente la conexión diagonal.
+ */
+
+.star-cv-connection-delay-1 {
+  animation-delay: 200ms;
+}
+
+.star-cv-connection-delay-2 {
+  animation-delay: 400ms;
+}
+
+.star-cv-connection-delay-3 {
+  animation-delay: 600ms;
+}

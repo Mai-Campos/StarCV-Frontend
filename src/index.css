@@ -46,3 +46,89 @@ body {
     font-family: 'Roboto', sans-serif;
 
 }
+
+/*
+  ESTRELLA CENTRAL
+*/
+
+@keyframes star-cv-core-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.25);
+    opacity: 0.7;
+  }
+}
+
+.star-cv-core {
+  animation: star-cv-core-pulse 1.8s ease-in-out infinite;
+}
+
+
+/*
+  NODOS 
+*/
+
+@keyframes star-cv-node-appear {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.star-cv-node {
+  animation: star-cv-node-appear 500ms ease-out forwards;
+}
+
+
+.star-cv-node-delay-1 {
+  animation-delay: 300ms;
+}
+
+.star-cv-node-delay-2 {
+  animation-delay: 600ms;
+}
+
+
+/*
+  CONEXIONES SVG
+*/
+
+@keyframes star-cv-draw-line {
+  from {
+    stroke-dashoffset: 100;
+    opacity: 0;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.star-cv-connection {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: star-cv-draw-line 600ms ease-out forwards;
+}
+
+.star-cv-connection-delay-1 {
+  animation-delay: 200ms;
+}
+
+.star-cv-connection-delay-2 {
+  animation-delay: 400ms;
+}
+
+.star-cv-connection-delay-3 {
+  animation-delay: 600ms;
+}
