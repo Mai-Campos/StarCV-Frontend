@@ -7,7 +7,7 @@ class AuthService {
   }
 
   async refresh(): Promise<AuthResponse> {
-    return (await api.post<AuthResponse>("auth/refresh")).data;
+    return (await api.post<AuthResponse>("/auth/refresh")).data;
   }
 
   async logout(): Promise<void> {
