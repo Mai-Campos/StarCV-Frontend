@@ -1,5 +1,5 @@
-import { Star } from "lucide-react";
 import LoginForm from "../components/LoginForm";
+import logo from "../assets/star-cv-logo.webp";
 
 function LoginPage() {
   return (
@@ -7,11 +7,7 @@ function LoginPage() {
       <section className="w-full max-w-lg rounded-2xl bg-(--color-surface) p-10 shadow-xl">
         {/* Logo */}
         <div className="flex justify-center">
-          <Star
-            size={42}
-            strokeWidth={1.8}
-            className="fill-(--color-accent) text-(--color-accent)"
-          />
+          <img src={logo} alt="Star-CV" className="h-28 w-28 object-contain" />
         </div>
 
         {/* Welcome */}

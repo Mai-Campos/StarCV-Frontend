@@ -11,7 +11,7 @@
   --color-text-muted: #8c6e63;
 
   --color-surface: #ffffff;
-  --color-border: #d3a376;
+ --color-border: rgba(62, 37, 34, 0.08);
 
   --color-success: #4f7a55;
   --color-error: #a33a3a;
